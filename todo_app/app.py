@@ -20,6 +20,21 @@ def create_new_task():
     add_item(new_item)
     return redirect(url_for("index"))
 
+@app.route('/doing_item/<id>')
+def doing_item(id):
+    status = "doing"
+    item_to_do = get_item(id)
+    item_to_do["status"] = status
+    save_item(item_to_do)
+    return redirect(url_for("index"))
+
+@app.route('/to_do_item/<id>')
+def to_do_item(id):
+    status = "Not Started"
+    item_to_start = get_item(id)
+    item_to_start["status"] = status
+    save_item(item_to_start)
+    return redirect(url_for("index"))
 
 @app.route('/complete_item/<id>')
 def complete_item(id):
@@ -33,4 +48,3 @@ def complete_item(id):
 def delete_item(id):
     remove_item(id)
     return redirect(url_for("index"))
-
