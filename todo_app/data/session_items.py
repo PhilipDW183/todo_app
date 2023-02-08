@@ -86,3 +86,20 @@ def remove_item(id):
     session['items'] = updated_items
 
     return id
+
+def update_item(id, status):
+    """
+    Updates the status of the item.
+
+    Args:
+        id: item id to be updated
+        status: item status to be updated to
+    
+    returns:
+        item_to_update
+    """
+    item_to_update = get_item(id)
+    item_to_update["status"] = status
+    save_item(item_to_update)
+
+    return item_to_update

@@ -1,5 +1,5 @@
 from flask import Flask, render_template, url_for, redirect, request
-from todo_app.data.session_items import get_items, add_item, save_item, get_item, remove_item
+from todo_app.data.session_items import get_items, add_item, save_item, get_item, remove_item, update_item
 
 
 from todo_app.flask_config import Config
@@ -22,25 +22,17 @@ def create_new_task():
 
 @app.route('/doing_item/<id>')
 def doing_item(id):
-    status = "doing"
-    item_to_do = get_item(id)
-    item_to_do["status"] = status
-    save_item(item_to_do)
+    update_item(id, "Doing")
     return redirect(url_for("index"))
 
 @app.route('/to_do_item/<id>')
 def to_do_item(id):
-    status = "Not Started"
-    item_to_start = get_item(id)
-    item_to_start["status"] = status
-    save_item(item_to_start)
+    update_item(id, "Not Started")
     return redirect(url_for("index"))
 
 @app.route('/complete_item/<id>')
 def complete_item(id):
-    item_to_complete = get_item(id)
-    item_to_complete["status"] = "Completed"
-    save_item(item_to_complete)
+    update_item(id, "Completed")
     return redirect(url_for("index"))
 
 
