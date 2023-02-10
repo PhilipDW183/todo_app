@@ -2,14 +2,15 @@
 {% block title %}To-Do App{% endblock %}
 
 {% block content %}
-  <div class="jumbotron">
+  <div class="jumbotron bg-primary text-light">
     <h1 class="display-4">To-Do App</h1>
     <p class="lead">Just another to-do app.</p>
+    <a class ="btn btn-secondary mt-3" href = "#new_task" role="button">Create new task</a>
   </div>
 
   <div class="row">
     <div class="col-md-12">
-      <h2 class="mb-3" >Tasks</h2>
+      <h2 class="mb-3" ><u>Tasks</u></h2>
       <h3 class="mb-3">To be completed</h3>
       <ul class="list-group mb-4">
         {% for item in items if item["status"] == "Not Started" %}
@@ -20,7 +21,7 @@
                       {{ item.title }}
                  </div>
                   <div class = "col-3 col-sm-2 offset-sm-0 offset-6">
-                      <a class ="btn btn-outline-warning" href="doing_item/{{ item.id }}" role="button">
+                      <a class ="btn btn-outline-primary" href="doing_item/{{ item.id }}" role="button">
               Doing
               </a>
                   </div>
@@ -43,7 +44,7 @@
                     {{ item.title }}
                </div>
                 <div class = "col-5 col-sm-3 col-md-2 offset-0 offset-sm-4 offset-md-0">
-                    <a class ="btn btn-outline-primary" href="to_do_item/{{ item.id }}" role="button">
+                    <a class ="btn btn-outline-warning" href="to_do_item/{{ item.id }}" role="button">
             To do
             </a>
                 </div>
@@ -72,7 +73,7 @@
                       {{ item.title }}
                  </div>
                  <div class = "col-3 col-sm-2 offset-sm-0 offset-6">
-                    <a class ="btn btn-outline-warning" href="doing_item/{{ item.id }}" role="button">
+                    <a class ="btn btn-outline-primary" href="doing_item/{{ item.id }}" role="button">
             Doing
             </a>
         </div>
@@ -89,10 +90,11 @@
     </div>
   </div>
 
-    <div class = "form_collect mb-3">
+    <div class = "form_collect mt-3 mb-3" id="new_task">
+        <h3 class="mb-3 mt-3"><u>New Task</u></h3>
         <form action = {{ url_for("create_new_task") }} method="post">
             <div class="form-group">
-                <label for="todo">Enter an item to complete: </label>
+                <label for="todo">Enter a task to complete: </label>
                 <input type = "text" name="todo" id="todo" class="form-control" placeholder="task" required>
             </div>
             <div class = "form_item">
